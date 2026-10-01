@@ -4,47 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>QuickNotes - Home</title>
 </head>
 
 <body>
-    <h1>S1l3ntAdm1n</h1>
-    <h2>welcome to hackers world </h2>
-    <p>learning hacking is fun till the hacker becomes the prey</p>
+    <header>
+        <h1>QuickNotes</h1>
+        <p>Capture your thoughts instantly.</p>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <main>
+        <section id="create-note">
+            <h2>Create a Note</h2>
+            <form id="note-form">
+                <div>
+                    <label for="note-title">Title:</label>
+                    <input type="text" id="note-title" name="title">
+                </div>
+                <div>
+                    <label for="note-content">Content:</label>
+                    <textarea id="note-content" name="content"></textarea>
+                </div>
+                <button type="submit">Save Note</button>
+            </form>
+        </section>
 
+        <section id="notes-list">
+            <h2>Your Notes</h2>
+            <div class="note card">
+                <h3>Welcome to QuickNotes</h3>
+                <p>Start jotting down your thoughts, ideas, and daily tasks here!</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 QuickNotes. All rights reserved.</p>
+    </footer>
 </body>
 
-<body>
-    <ul>
-        <li>one</li>
-        <li>two</li>
-        <li>three</li>
-        <li>four</li>
-        <li>five</li>
-    </ul>
-    <ol>
-        <li>one</li>
-        <li>two</li>
-        <li>three</li>
-        <li>four</li>
-        <li>five</li>
-    </ol>
-
-    <a href="https://theportablewife.com/wp-content/uploads/must-take-pictures-in-paris-facebook.jpg">eiffle
-        tower</a>
-    <img src="https://theportablewife.com/wp-content/uploads/must-take-pictures-in-paris-facebook.jpg" alt="eiffle
-        tower">
-    <form id="myform">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
-        <input type="submit" value="Submit">
-    </form>
-    <div class="note card">
-        <p>my name is hacker </p>
-    </div>
-</body>
+</html>
