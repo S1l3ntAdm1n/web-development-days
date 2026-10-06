@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="QuickNotes Day 4 - Interactive note taking with character and word counters, draft auto-save, and dark mode.">
+  <title>QuickNotes - Day 4</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-layout">
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="branding">
+          <div class="logo-mark" aria-hidden="true">&#9997;&#65039;</div>
+          <div class="brand-text">
+            <h1>QuickNotes</h1>
+            <p class="tagline">Day 4 &bull; Note Taking with Live Counters & Theming</p>
+          </div>
+        </div>
+        <nav class="nav-bar">
+          <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+          <button id="theme-toggle" type="button" aria-label="Toggle dark/light mode">Dark mode</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="card note-card">
+        <div class="card-header">
+          <div class="label-wrapper">
+            <label for="note-text" class="field-label">Note Text</label>
+            <span class="hint-badge"><kbd>Esc</kbd> clears note</span>
+          </div>
+        </div>
+
+        <div class="textarea-wrapper">
+          <textarea
+            id="note-text"
+            rows="8"
+            placeholder="Type your note here... Your text is automatically saved as a draft in localStorage."
+            spellcheck="true"
+          ></textarea>
+        </div>
+
+        <div class="card-footer">
+          <div class="counters-box">
+            <p id="char-count">0 / 200 characters</p>
+            <p id="word-count">0 words</p>
+          </div>
+
+          <div class="actions-box">
+            <button id="clear-btn" type="button">Clear</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>&copy; 2026 QuickNotes. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>

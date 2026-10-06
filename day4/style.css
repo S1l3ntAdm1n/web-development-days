@@ -1,0 +1,596 @@
+/* ==========================================================================
+   QuickNotes - Day 4 Stylesheet
+   Theming via CSS Custom Properties & Dynamic Counters
+   ========================================================================== */
+
+/* 1. CSS Variables on :root (Light Theme) */
+:root {
+  /* Colors */
+  --bg-body: #f8fafc;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #e2e8f0 0%, #f8fafc 75%);
+  --header-bg: #ffffff;
+  --header-border: #e2e8f0;
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --card-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-subtle: #94a3b8;
+
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --input-text: #0f172a;
+  --input-placeholder: #94a3b8;
+  --input-focus-border: #2563eb;
+  --input-focus-ring: rgba(37, 99, 235, 0.15);
+
+  --primary-accent: #2563eb;
+  --primary-accent-hover: #1d4ed8;
+
+  --clear-btn-bg: #fee2e2;
+  --clear-btn-text: #b91c1c;
+  --clear-btn-border: #fecaca;
+  --clear-btn-hover-bg: #fecaca;
+  --clear-btn-hover-text: #991b1b;
+
+  --theme-btn-bg: #f1f5f9;
+  --theme-btn-text: #1e293b;
+  --theme-btn-border: #cbd5e1;
+  --theme-btn-hover-bg: #e2e8f0;
+
+  --counter-bg: #f8fafc;
+  --counter-border: #e2e8f0;
+  --counter-text: #475569;
+
+  --badge-bg: #eff6ff;
+  --badge-text: #1d4ed8;
+  --badge-border: #bfdbfe;
+
+  --kbd-bg: #e2e8f0;
+  --kbd-text: #334155;
+  --kbd-border: #cbd5e1;
+
+  --table-header-bg: #f1f5f9;
+  --table-border: #e2e8f0;
+  --table-alt-row: #f8fafc;
+  --table-hover-row: #f1f5f9;
+
+  --footer-text: #64748b;
+  --footer-border: #e2e8f0;
+}
+
+/* 2. Dark Theme: Redefining ONLY the CSS variables */
+body.dark {
+  --bg-body: #090d16;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #1e293b 0%, #090d16 75%);
+  --header-bg: rgba(17, 24, 39, 0.85);
+  --header-border: rgba(255, 255, 255, 0.08);
+  --card-bg: rgba(17, 24, 39, 0.85);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+
+  --input-bg: rgba(15, 23, 42, 0.8);
+  --input-border: #334155;
+  --input-text: #f8fafc;
+  --input-placeholder: #64748b;
+  --input-focus-border: #38bdf8;
+  --input-focus-ring: rgba(56, 189, 248, 0.2);
+
+  --primary-accent: #38bdf8;
+  --primary-accent-hover: #0ea5e9;
+
+  --clear-btn-bg: rgba(239, 68, 68, 0.15);
+  --clear-btn-text: #f87171;
+  --clear-btn-border: rgba(239, 68, 68, 0.3);
+  --clear-btn-hover-bg: rgba(239, 68, 68, 0.25);
+  --clear-btn-hover-text: #fca5a5;
+
+  --theme-btn-bg: #1e293b;
+  --theme-btn-text: #f8fafc;
+  --theme-btn-border: #334155;
+  --theme-btn-hover-bg: #334155;
+
+  --counter-bg: rgba(15, 23, 42, 0.6);
+  --counter-border: #334155;
+  --counter-text: #94a3b8;
+
+  --badge-bg: rgba(56, 189, 248, 0.1);
+  --badge-text: #38bdf8;
+  --badge-border: rgba(56, 189, 248, 0.25);
+
+  --kbd-bg: #1e293b;
+  --kbd-text: #cbd5e1;
+  --kbd-border: #334155;
+
+  --table-header-bg: #1e293b;
+  --table-border: #334155;
+  --table-alt-row: rgba(30, 41, 59, 0.4);
+  --table-hover-row: rgba(30, 41, 59, 0.8);
+
+  --footer-text: #94a3b8;
+  --footer-border: rgba(255, 255, 255, 0.08);
+}
+
+/* 3. Base Resets */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-body);
+  background-image: var(--bg-gradient);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 4. Header & Navigation */
+.app-header {
+  background-color: var(--header-bg);
+  border-bottom: 1px solid var(--header-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.logo-mark {
+  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-text h1 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.tagline {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--primary-accent);
+  background-color: var(--badge-bg);
+}
+
+/* 5. Theme Toggle Button */
+#theme-toggle {
+  background-color: var(--theme-btn-bg);
+  color: var(--theme-btn-text);
+  border: 1px solid var(--theme-btn-border);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+#theme-toggle:hover {
+  background-color: var(--theme-btn-hover-bg);
+  transform: translateY(-1px);
+}
+
+#theme-toggle:active {
+  transform: translateY(0);
+}
+
+/* 6. Main Content & Card */
+.main-content {
+  flex: 1;
+  max-width: 900px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  padding: 2rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.note-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.field-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+.hint-badge {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+kbd {
+  background-color: var(--kbd-bg);
+  color: var(--kbd-text);
+  border: 1px solid var(--kbd-border);
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* 7. Textarea */
+.textarea-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+textarea#note-text {
+  width: 100%;
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--input-text);
+  border-radius: 12px;
+  padding: 1.15rem;
+  font-family: inherit;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  resize: vertical;
+  min-height: 160px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+textarea#note-text::placeholder {
+  color: var(--input-placeholder);
+}
+
+textarea#note-text:focus {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 3px var(--input-focus-ring);
+}
+
+/* 8. Counters & Footer Actions */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+.counters-box {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background-color: var(--counter-bg);
+  border: 1px solid var(--counter-border);
+  border-radius: 10px;
+  padding: 0.65rem 1.25rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+#char-count,
+#word-count {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--counter-text);
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  transition: color 0.2s ease;
+}
+
+/* Character counter states: Warning (orange) & Over (red, bold) */
+.warning {
+  color: orange;
+}
+
+.over {
+  color: red;
+  font-weight: bold;
+}
+
+#char-count.warning {
+  color: orange;
+}
+
+#char-count.over {
+  color: red;
+  font-weight: bold;
+}
+
+/* 9. Action Buttons */
+.actions-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+#clear-btn {
+  background-color: var(--clear-btn-bg);
+  color: var(--clear-btn-text);
+  border: 1px solid var(--clear-btn-border);
+  border-radius: 8px;
+  padding: 0.65rem 1.4rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+#clear-btn:hover {
+  background-color: var(--clear-btn-hover-bg);
+  color: var(--clear-btn-hover-text);
+  transform: translateY(-1px);
+}
+
+#clear-btn:active {
+  transform: translateY(0);
+}
+
+/* 10. Styles for about.html compatibility */
+section {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--card-shadow);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+section h1,
+section h2 {
+  color: var(--text-main);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+section h1 {
+  font-size: 1.8rem;
+}
+
+section h2 {
+  font-size: 1.35rem;
+}
+
+section p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+ol, ul {
+  color: var(--text-muted);
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  border: 1px solid var(--table-border);
+  padding: 0.85rem 1rem;
+  text-align: left;
+}
+
+th {
+  background-color: var(--table-header-bg);
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+td {
+  color: var(--text-muted);
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--table-alt-row);
+}
+
+tbody tr:hover {
+  background-color: var(--table-hover-row);
+}
+
+form div {
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.45rem;
+  color: var(--text-main);
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--input-text);
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 3px var(--input-focus-ring);
+}
+
+button[type="submit"] {
+  background-color: var(--primary-accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--primary-accent-hover);
+}
+
+/* 11. Footer */
+.app-footer,
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--footer-text);
+  font-size: 0.88rem;
+  margin-top: auto;
+  border-top: 1px solid var(--footer-border);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+/* 12. Responsive Design */
+@media (max-width: 640px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+
+  .nav-bar {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .main-content {
+    margin: 1rem auto;
+    padding: 0 1rem;
+  }
+
+  .card {
+    padding: 1.25rem;
+  }
+
+  .card-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .counters-box {
+    justify-content: space-around;
+  }
+
+  #clear-btn {
+    width: 100%;
+  }
+}
