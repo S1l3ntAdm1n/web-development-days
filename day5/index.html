@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Day 5 - Asynchronous User Directory: Fetch and display users from JSONPlaceholder with client-side name filtering, accessible UI, and live status feedback.">
+  <title>User Directory - Day 5 Async API</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="users.js" defer></script>
+</head>
+<body>
+  <div class="app-layout">
+    <header class="app-header">
+      <div class="header-badge">Day 5 &bull; Asynchronous JavaScript</div>
+      <h1 class="header-title">User Directory</h1>
+      <p class="header-subtitle">Fetch remote user profiles, manage async state, and filter results dynamically.</p>
+    </header>
+
+    <main class="app-card">
+      <div class="controls-toolbar">
+        <button id="load-users" type="button">Load Users</button>
+        <div class="filter-field">
+          <label for="filter-input">Filter by name:</label>
+          <input
+            type="text"
+            id="filter-input"
+            placeholder="Type a name to filter..."
+            autocomplete="off"
+            spellcheck="false"
+          >
+        </div>
+      </div>
+
+      <div class="status-container">
+        <p id="status"></p>
+      </div>
+
+      <section class="results-section">
+        <ul id="users-list"></ul>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Data provided by <a href="https://jsonplaceholder.typicode.com/" target="_blank" rel="noopener noreferrer">JSONPlaceholder API</a></p>
+    </footer>
+  </div>
+</body>
+</html>
