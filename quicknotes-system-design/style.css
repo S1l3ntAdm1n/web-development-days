@@ -1,0 +1,539 @@
+/* ==========================================================================
+   QuickNotes System Design - Modern, Clean & Accessible Stylesheet
+   ========================================================================== */
+
+/* 1. Box-Sizing Reset & Base Setup */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Color Palette */
+  --header-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #2563eb 100%);
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-active: #1e40af;
+  --primary-focus: rgba(37, 99, 235, 0.25);
+
+  --success: #16a34a;
+  --success-hover: #15803d;
+  --success-bg: #ecfdf5;
+  --success-border: #86efac;
+  --success-text: #065f46;
+
+  --error: #dc2626;
+  --error-hover: #b91c1c;
+  --error-bg: #fef2f2;
+  --error-border: #fca5a5;
+  --error-text: #991b1b;
+
+  --loading-bg: #eff6ff;
+  --loading-border: #93c5fd;
+  --loading-text: #1e40af;
+
+  --info-bg: #f8fafc;
+  --info-border: #e2e8f0;
+  --info-text: #475569;
+
+  /* Surfaces & Neutrals */
+  --bg-page: #f8fafc;
+  --bg-card: #ffffff;
+  --border-color: #e2e8f0;
+  --border-focus: #3b82f6;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+
+  /* Typography & Layout Tokens */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. Body Styling */
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 3. Screen Reader Only Utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 4. App Header */
+.app-header {
+  background: var(--header-bg);
+  color: #ffffff;
+  padding: 2.5rem 1.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.header-container {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.brand-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: #e2e8f0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+}
+
+.brand-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.4rem;
+}
+
+.brand-subtitle {
+  font-size: 1rem;
+  color: #cbd5e1;
+  max-width: 580px;
+}
+
+/* 5. Main Layout Container */
+.main-container {
+  max-width: 760px;
+  width: 100%;
+  margin: -1.5rem auto 3rem auto;
+  padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+/* 6. Card Containers */
+.action-card,
+.form-card,
+.notes-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.action-card:hover,
+.form-card:hover,
+.notes-section:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.015em;
+  margin-bottom: 1rem;
+}
+
+/* 7. Action Bar */
+.action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.action-hint {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* 8. Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.btn-primary:active:not(:disabled) {
+  background: var(--primary-active);
+}
+
+.btn-success {
+  background: var(--success);
+  color: #ffffff;
+}
+
+.btn-success:hover:not(:disabled) {
+  background: var(--success-hover);
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--error);
+  border: 1px solid var(--error-border);
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8125rem;
+  border-radius: var(--radius-sm);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: var(--error);
+  color: #ffffff;
+  border-color: var(--error);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(20%);
+}
+
+/* 9. Global Status Box */
+.status-section {
+  display: flex;
+  flex-direction: column;
+}
+
+#status {
+  display: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  padding: 0.875rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  line-height: 1.5;
+  animation: fadeIn 0.25s ease-out;
+}
+
+/* Distinct Status Styles */
+#status.status-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background-color: var(--loading-bg);
+  border-color: var(--loading-border);
+  color: var(--loading-text);
+}
+
+#status.status-loading::before {
+  content: "";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--loading-text);
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+#status.status-success {
+  display: block;
+  background-color: var(--success-bg);
+  border-color: var(--success-border);
+  color: var(--success-text);
+}
+
+#status.status-error {
+  display: block;
+  background-color: var(--error-bg);
+  border-color: var(--error-border);
+  color: var(--error-text);
+}
+
+#status.status-info {
+  display: block;
+  background-color: var(--info-bg);
+  border-color: var(--info-border);
+  color: var(--info-text);
+}
+
+/* 10. Form Controls */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 0.4rem;
+}
+
+.required {
+  color: var(--error);
+}
+
+.char-limit,
+.optional {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.7rem 0.95rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--text-main);
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-focus);
+}
+
+.textarea-control {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* 11. Notes Section & Counter */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.75rem;
+}
+
+.section-header .card-title {
+  margin-bottom: 0;
+}
+
+.notes-counter {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-page);
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border-color);
+}
+
+/* 12. Notes List & Cards */
+.notes-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.note-item {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.note-item:hover {
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.note-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.note-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.note-id-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-light);
+  background: #f1f5f9;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.note-body {
+  font-size: 0.9375rem;
+  color: #334155;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.note-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--border-color);
+}
+
+/* Empty State Card */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--text-muted);
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-page);
+}
+
+.empty-state-title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 0.35rem;
+}
+
+.empty-state-text {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* 13. App Footer */
+.app-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+  background: #ffffff;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.footer-container {
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+/* 14. Keyframe Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 15. Responsive Adjustments */
+@media (max-width: 640px) {
+  .app-header {
+    padding: 2rem 1rem;
+  }
+
+  .brand-title {
+    font-size: 1.75rem;
+  }
+
+  .main-container {
+    margin-top: -1rem;
+    padding: 0 1rem;
+  }
+
+  .action-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .action-bar .btn {
+    width: 100%;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+  }
+
+  .note-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+}

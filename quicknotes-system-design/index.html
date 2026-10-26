@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickNotes - API Client & System Design</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="api.js" defer></script>
+</head>
+<body>
+  <!-- Application Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="branding">
+        <span class="brand-badge">REST API Client</span>
+        <h1 class="brand-title">QuickNotes</h1>
+        <p class="brand-subtitle">Manage notes seamlessly with full asynchronous CRUD operations and state handling.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-container">
+    <!-- Action Bar: Load Notes -->
+    <section class="action-card" aria-labelledby="actions-heading">
+      <h2 id="actions-heading" class="sr-only">Actions</h2>
+      <div class="action-bar">
+        <button type="button" id="load-btn" class="btn btn-primary">
+          <span class="btn-text">Load Notes</span>
+        </button>
+        <span class="action-hint">Fetches the latest 10 notes from the API</span>
+      </div>
+    </section>
+
+    <!-- Global Status Message (Loading, Success, Error) -->
+    <section class="status-section" aria-live="polite" aria-atomic="true">
+      <p id="status"></p>
+    </section>
+
+    <!-- Create Note Form -->
+    <section class="form-card" aria-labelledby="form-heading">
+      <h2 id="form-heading" class="card-title">Create a Note</h2>
+      <form id="note-form" novalidate>
+        <div class="form-group">
+          <label for="title-input" class="form-label">
+            Title <span class="required" aria-hidden="true">*</span>
+            <span class="char-limit">(Max 100 characters)</span>
+          </label>
+          <input 
+            type="text" 
+            id="title-input" 
+            name="title" 
+            class="form-control" 
+            placeholder="e.g., System Architecture Review"
+            maxlength="100"
+            required
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="body-input" class="form-label">
+            Body <span class="optional">(Optional)</span>
+          </label>
+          <textarea 
+            id="body-input" 
+            name="body" 
+            class="form-control textarea-control" 
+            rows="4" 
+            placeholder="Write your note contents, ideas, or architectural thoughts here..."
+          ></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" id="submit-btn" class="btn btn-success">
+            <span class="btn-text">Add Note</span>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Notes List Display -->
+    <section class="notes-section" aria-labelledby="notes-heading">
+      <div class="section-header">
+        <h2 id="notes-heading" class="card-title">Notes Feed</h2>
+        <span id="notes-counter" class="notes-counter">0 notes</span>
+      </div>
+      <ul id="notes-list" class="notes-list"></ul>
+    </section>
+  </main>
+
+  <!-- Application Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>QuickNotes System Design & API Client &bull; Built with Semantic HTML5, Vanilla CSS &amp; Modern Asynchronous JavaScript</p>
+    </div>
+  </footer>
+</body>
+</html>
